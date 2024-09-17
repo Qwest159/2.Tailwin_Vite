@@ -1,4 +1,6 @@
 <script setup>
+import { RouterLink } from "vue-router";
+
 defineProps({
   url: {
     type: String,
@@ -8,11 +10,6 @@ defineProps({
   text: {
     type: String,
     required: true,
-  },
-  isActive: {
-    type: Boolean,
-    required: false,
-    default: false,
   },
   isDisabled: {
     type: Boolean,
@@ -24,18 +21,18 @@ defineProps({
 
 <template>
   <li class="list-none">
-    <a
-      class="block px-4 py-2"
+    <RouterLink
+      class="block px-4 py-2 text-base"
       :class="{
-        'text-blue-600 font-semibold': isActive,
         'text-gray-500 pointer-events-none opacity-50': isDisabled,
+        'text-blue-500 hover:text-blue-600': !isDisabled,
       }"
+      activeClass="font-semibold text-blue-600"
       aria-current="page"
-      :href="url"
-      :disabled="isDisabled"
+      :to="url"
       :aria-disabled="isDisabled"
     >
       {{ text }}
-    </a>
+    </RouterLink>
   </li>
 </template>
